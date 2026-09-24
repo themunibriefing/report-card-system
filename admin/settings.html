@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>School Settings — Canaan Progressive Schools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">Canaan Progressive<br />Schools</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="students.html">Students</a>
+      <a href="teachers.html">Teachers</a>
+      <a href="classes.html">Classes</a>
+      <a href="subjects.html">Subjects</a>
+      <a href="terms.html">Terms</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="marks.html">Marks</a>
+      <a href="results.html">Results</a>
+      <a href="reports.html">Report Cards</a>
+      <a href="settings.html" class="active">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>School Settings</h1>
+      <div class="who" id="whoAmI"></div>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div style="max-width: 520px;">
+      <form id="settingsForm">
+        <div class="field">
+          <label for="schoolName">School name</label>
+          <input type="text" id="schoolName" required />
+        </div>
+        <div class="field">
+          <label for="motto">Motto</label>
+          <input type="text" id="motto" />
+        </div>
+        <div class="field">
+          <label for="address">Address</label>
+          <input type="text" id="address" />
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="headTeacherName">Head teacher's name</label>
+          <input type="text" id="headTeacherName" />
+        </div>
+        <div class="modal-actions" style="margin-top:8px;">
+          <button type="submit" class="primary">Save details</button>
+        </div>
+      </form>
+
+      <hr style="border:none;border-top:1px solid var(--border);margin:28px 0;" />
+
+      <h2 style="font-size:1rem;">School logo</h2>
+      <div id="logoPreviewWrap" style="margin-bottom:10px;"></div>
+      <input type="file" id="logoInput" accept="image/*" />
+      <p id="logoStatus" style="font-size:0.82rem;color:var(--ink-soft);margin-top:6px;"></p>
+
+      <h2 style="font-size:1rem;margin-top:24px;">Head teacher's signature</h2>
+      <div id="signaturePreviewWrap" style="margin-bottom:10px;"></div>
+      <input type="file" id="signatureInput" accept="image/*" />
+      <p id="signatureStatus" style="font-size:0.82rem;color:var(--ink-soft);margin-top:6px;"></p>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/settings.js"></script>
+
+</body>
+</html>

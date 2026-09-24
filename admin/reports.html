@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Report Cards — Canaan Progressive Schools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">Canaan Progressive<br />Schools</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="students.html">Students</a>
+      <a href="teachers.html">Teachers</a>
+      <a href="classes.html">Classes</a>
+      <a href="subjects.html">Subjects</a>
+      <a href="terms.html">Terms</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="marks.html">Marks</a>
+      <a href="results.html">Results</a>
+      <a href="reports.html" class="active">Report Cards</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>Report Cards</h1>
+      <div class="who" id="whoAmI"></div>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div class="toolbar">
+      <select id="yearSelect"></select>
+      <select id="termSelect"></select>
+      <select id="classSelect"></select>
+      <select id="streamSelect"><option value="">Whole class</option></select>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Student</th><th>Subjects recorded</th><th></th></tr></thead>
+        <tbody id="tableBody">
+          <tr><td colspan="3" class="page-loading">Choose a year, term, and class to begin.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/reports-select.js"></script>
+
+</body>
+</html>

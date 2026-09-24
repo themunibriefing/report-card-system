@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Report Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="report-toolbar no-print">
+  <a href="#" class="secondary" id="backLink" style="padding:9px 16px;border:1px solid var(--border);border-radius:4px;text-decoration:none;color:var(--ink);">&larr; Back</a>
+  <button class="primary" id="savePdfBtn">
+    Save as PDF
+</button>
+</div>
+
+<div id="alertBox" style="max-width:780px;margin:0 auto 16px auto;"></div>
+
+<div class="report-card" id="reportCard" style="display:none;">
+  <div class="report-header">
+    <img class="school-logo" id="schoolLogo" style="display:none;" />
+    <div>
+      <div class="school-name" id="schoolName"></div>
+      <div class="school-motto" id="schoolMotto"></div>
+      <div class="school-contact" id="schoolContact"></div>
+    </div>
+  </div>
+
+  <div class="report-title">Academic Report Card</div>
+
+  <div class="report-student-info">
+    <div><span class="label">Student:</span><strong id="studentName"></strong></div>
+    <div><span class="label">Academic Year:</span><span id="infoYear"></span></div>
+    <div><span class="label">Class:</span><span id="infoClass"></span></div>
+    <div><span class="label">Term:</span><span id="infoTerm"></span></div>
+  </div>
+
+  <table class="report-results">
+    <thead>
+      <tr><th>Subject</th><th class="num">AOI</th><th class="num">Exam</th><th class="num">Total</th><th class="num">Grade</th><th>Remarks</th><th class="num">Teacher</th></tr>
+    </thead>
+    <tbody id="resultsBody"></tbody>
+  </table>
+
+  <p class="report-next-term no-print-hide" id="nextTermNote" style="display:none;"></p>
+
+  <div class="grading-key">
+  <strong>Grading Scale:</strong>
+  <span>A: 85–100</span>
+  <span>B: 75–84</span>
+  <span>C: 60–74</span>
+  <span>D: 50–59</span>
+  <span>E: 0–49</span>
+</div>
+
+ <div class="report-comments">
+
+  <div class="comment-block">
+    <div class="comment-label">Class Teacher's Comment</div>
+    <div class="handwritten-line">&nbsp;</div>
+  </div>
+
+  <div class="comment-block">
+    <div class="comment-label">Head Teacher's Comment</div>
+    <div class="handwritten-line">&nbsp;</div>
+  </div>
+
+  <div class="stamp-area">
+    <div class="stamp-space"></div>
+  </div>
+
+</div>
+  <div class="report-signature">
+    <div class="sig-block">
+      <img id="signatureImg" style="display:none;" />
+      <div class="sig-line"><span id="headTeacherName"></span><br />Head Teacher</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="../js/report-card.js"></script>
+
+</body>
+</html>

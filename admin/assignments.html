@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Assignments — Canaan Progressive Schools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">Canaan Progressive<br />Schools</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="students.html">Students</a>
+      <a href="teachers.html">Teachers</a>
+      <a href="classes.html">Classes</a>
+      <a href="subjects.html">Subjects</a>
+      <a href="terms.html">Terms</a>
+      <a href="assignments.html" class="active">Assignments</a>
+      <a href="marks.html">Marks</a>
+      <a href="results.html">Results</a>
+      <a href="reports.html">Report Cards</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>Assignments</h1>
+      <div class="who" id="whoAmI"></div>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <div class="toolbar">
+      <label style="font-size:0.85rem;color:var(--ink-soft);">Academic year</label>
+      <select id="yearSelect"></select>
+    </div>
+
+    <h2 style="font-size:1.05rem;">Subject assignments</h2>
+    <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:-8px;">Which teacher teaches which subject, to which class.</p>
+    <div class="table-wrap" style="margin-bottom:16px;">
+      <table class="data-table">
+        <thead><tr><th>Teacher</th><th>Subject</th><th>Class</th><th>Stream</th><th></th></tr></thead>
+        <tbody id="subjectAssignBody"><tr><td colspan="5" class="page-loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <form id="subjectAssignForm" class="toolbar" style="margin-bottom:32px;">
+      <select id="saTeacher" required></select>
+      <select id="saSubject" required></select>
+      <select id="saClass" required></select>
+      <select id="saStream"><option value="">Whole class</option></select>
+      <button type="submit" class="secondary">+ Assign</button>
+    </form>
+
+    <h2 style="font-size:1.05rem;">Class teacher assignments</h2>
+    <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:-8px;">Who is the class teacher responsible for a class's comments and register.</p>
+    <div class="table-wrap" style="margin-bottom:16px;">
+      <table class="data-table">
+        <thead><tr><th>Teacher</th><th>Class</th><th>Stream</th><th></th></tr></thead>
+        <tbody id="classTeacherBody"><tr><td colspan="4" class="page-loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
+    <form id="classTeacherForm" class="toolbar">
+      <select id="ctTeacher" required></select>
+      <select id="ctClass" required></select>
+      <select id="ctStream"><option value="">Whole class</option></select>
+      <button type="submit" class="secondary">+ Assign</button>
+    </form>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/assignments.js"></script>
+
+</body>
+</html>

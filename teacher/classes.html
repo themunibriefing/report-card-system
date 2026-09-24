@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>My Classes — Canaan Progressive Schools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">Canaan Progressive<br />Schools</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="classes.html" class="active">My Classes</a>
+      <a href="marks.html">Enter Marks</a>
+      <a href="results.html">Results</a>
+      <a href="comments.html">Comments</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>My Classes &amp; Subjects</h1>
+      <div class="who" id="whoAmI"></div>
+    </div>
+
+    <div id="alertBox"></div>
+
+    <h2 style="font-size:1.05rem;">Subjects I teach</h2>
+    <div class="table-wrap" style="margin-bottom:28px;">
+      <table class="data-table">
+        <thead><tr><th>Subject</th><th>Class</th><th>Stream</th><th>Academic Year</th></tr></thead>
+        <tbody id="subjectsBody"><tr><td colspan="4" class="page-loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
+
+    <h2 style="font-size:1.05rem;">Classes I am class teacher for</h2>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Class</th><th>Stream</th><th>Academic Year</th></tr></thead>
+        <tbody id="classTeacherBody"><tr><td colspan="3" class="page-loading">Loading…</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin-common.js"></script>
+<script src="../js/teacher-classes.js"></script>
+
+</body>
+</html>

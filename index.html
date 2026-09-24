@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Canaan Progressive Schools — Report Card System</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  (async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session) {
+      window.location.href = "login.html";
+      return;
+    }
+    const profile = await fetchOwnProfile();
+    if (!profile) {
+      window.location.href = "login.html";
+      return;
+    }
+    window.location.href =
+      profile.role === "admin" ? "admin/dashboard.html" : "teacher/dashboard.html";
+  })();
+</script>
+</body>
+</html>

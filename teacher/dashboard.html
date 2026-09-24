@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Teacher Dashboard — Canaan Progressive Schools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">Canaan Progressive<br />Schools</div>
+    <nav>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="classes.html">My Classes</a>
+      <a href="marks.html">Enter Marks</a>
+      <a href="results.html">Results</a>
+      <a href="comments.html">Comments</a>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="main-header">
+      <h1>Dashboard</h1>
+      <div class="who" id="whoAmI"></div>
+    </div>
+
+    <div class="cards">
+      <div class="stat-card">
+        <div class="value" id="statClasses">—</div>
+        <div class="label">My Classes</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statSubjects">—</div>
+        <div class="label">My Subjects</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statYear">—</div>
+        <div class="label">Current Academic Year</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statTerm">—</div>
+        <div class="label">Current Term</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="statPending">—</div>
+        <div class="label">Pending Mark Entry</div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <a href="marks.html">Enter Marks</a>
+      <a href="results.html">View Results</a>
+      <a href="classes.html">My Classes</a>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../js/supabase-config.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  (async () => {
+    const profile = await requireRole("teacher");
+    if (!profile) return;
+    document.getElementById("whoAmI").textContent = `${profile.full_name} · Teacher`;
+
+    const { data: assignments } = await supabaseClient
+      .from("teacher_assignments")
+      .select("id, class_id, stream_id, subject_id, academic_year_id")
+      .eq("teacher_id", profile.id);
+
+    const uniqueClasses = new Set((assignments || []).map((a) => `${a.class_id}-${a.stream_id || ""}`));
+    const uniqueSubjects = new Set((assignments || []).map((a) => a.subject_id));
+    document.getElementById("statClasses").textContent = uniqueClasses.size;
+    document.getElementById("statSubjects").textContent = uniqueSubjects.size;
+
+    const { data: years } = await supabaseClient.from("academic_years").select("id, year, is_current");
+    const currentYear = (years || []).find((y) => y.is_current);
+    document.getElementById("statYear").textContent = currentYear ? currentYear.year : "Not set";
+
+    let currentTerm = null;
+    if (currentYear) {
+      const { data: terms } = await supabaseClient.from("terms").select("id, name, is_current").eq("academic_year_id", currentYear.id);
+      currentTerm = (terms || []).find((t) => t.is_current);
+    }
+    document.getElementById("statTerm").textContent = currentTerm ? currentTerm.name : "Not set";
+
+    if (currentYear && currentTerm && assignments && assignments.length > 0) {
+      let pending = 0;
+      for (const a of assignments.filter((x) => x.academic_year_id === currentYear.id)) {
+        let studentQuery = supabaseClient
+          .from("students")
+          .select("id", { count: "exact", head: true })
+          .eq("class_id", a.class_id)
+          .eq("status", "active");
+        if (a.stream_id) studentQuery = studentQuery.eq("stream_id", a.stream_id);
+        const { count: studentCount } = await studentQuery;
+
+        const { count: marksCount } = await supabaseClient
+          .from("marks")
+          .select("id", { count: "exact", head: true })
+          .eq("subject_id", a.subject_id)
+          .eq("class_id", a.class_id)
+          .eq("academic_year_id", currentYear.id)
+          .eq("term_id", currentTerm.id);
+
+        pending += Math.max((studentCount || 0) - (marksCount || 0), 0);
+      }
+      document.getElementById("statPending").textContent = pending;
+    } else {
+      document.getElementById("statPending").textContent = "—";
+    }
+  })();
+
+  document.getElementById("logoutBtn").addEventListener("click", logout);
+</script>
+
+</body>
+</html>
