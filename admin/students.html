@@ -3,16 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
 <title>Students — Canaan Progressive Schools</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="../css/styles.css" />
 </head>
+
 <body>
 
 <div class="app-shell">
+
+  <!-- ==================================================
+       SIDEBAR
+  ================================================== -->
+
   <aside class="sidebar">
-    <div class="brand">Canaan Progressive<br />Schools</div>
+
+    <div class="brand">
+      Canaan Progressive<br />
+      Schools
+    </div>
+
     <nav>
       <a href="dashboard.html">Dashboard</a>
       <a href="students.html" class="active">Students</a>
@@ -26,97 +40,364 @@
       <a href="reports.html">Report Cards</a>
       <a href="settings.html">Settings</a>
     </nav>
+
     <div class="sidebar-footer">
       <button id="logoutBtn">Log out</button>
     </div>
+
   </aside>
 
+
+  <!-- ==================================================
+       MAIN CONTENT
+  ================================================== -->
+
   <main class="main">
+
     <div class="main-header">
+
       <h1>Students</h1>
-      <div class="who" id="whoAmI"></div>
+
+      <div
+        class="who"
+        id="whoAmI"
+      ></div>
+
     </div>
+
+
+    <!-- ==================================================
+         ALERT
+    ================================================== -->
 
     <div id="alertBox"></div>
 
+
+    <!-- ==================================================
+         TOOLBAR
+    ================================================== -->
+
     <div class="toolbar">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search by name…" />
-      <select id="classFilter"><option value="">All classes</option></select>
-      <select id="statusFilter">
-        <option value="">All statuses</option>
-        <option value="active">Active</option>
-        <option value="inactive">Inactive</option>
+
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Search by name…"
+      />
+
+      <select id="classFilter">
+        <option value="">All classes</option>
       </select>
+
+      <select id="statusFilter">
+
+        <option value="">
+          All statuses
+        </option>
+
+        <option value="active">
+          Active
+        </option>
+
+        <option value="inactive">
+          Inactive
+        </option>
+
+      </select>
+
       <div class="spacer"></div>
-      <button class="secondary" id="addBtn">+ Add Student</button>
+
+      <button
+        class="secondary"
+        id="addBtn"
+      >
+        + Add Student
+      </button>
+
     </div>
+
+
+    <!-- ==================================================
+         STUDENTS TABLE
+    ================================================== -->
 
     <div class="table-wrap">
+
       <table class="data-table">
+
         <thead>
-          <tr><th>Full Name</th><th>Gender</th><th>Date of Birth</th><th>Class</th><th>Status</th><th></th></tr>
+
+          <tr>
+
+            <th>Full Name</th>
+
+            <th>Gender</th>
+
+            <th>Section</th>
+
+            <th>Date of Birth</th>
+
+            <th>Class</th>
+
+            <th>Status</th>
+
+            <th></th>
+
+          </tr>
+
         </thead>
+
         <tbody id="tableBody">
-          <tr><td colspan="6" class="page-loading">Loading…</td></tr>
+
+          <tr>
+
+            <td
+              colspan="7"
+              class="page-loading"
+            >
+              Loading…
+            </td>
+
+          </tr>
+
         </tbody>
+
       </table>
+
     </div>
+
   </main>
+
 </div>
 
-<dialog class="modal" id="formDialog">
+
+<!-- ==================================================
+     ADD / EDIT STUDENT DIALOG
+================================================== -->
+
+<dialog
+  class="modal"
+  id="formDialog"
+>
+
   <div class="modal-body">
-    <h2 id="formTitle">Add Student</h2>
+
+    <h2 id="formTitle">
+      Add Student
+    </h2>
+
     <div id="formAlert"></div>
+
+
     <form id="studentForm">
-      <input type="hidden" id="studentId" />
+
+      <input
+        type="hidden"
+        id="studentId"
+      />
+
+
+      <!-- ==================================================
+           FULL NAME
+      ================================================== -->
+
       <div class="field">
-        <label for="fullName">Full name</label>
-        <input type="text" id="fullName" required />
+
+        <label for="fullName">
+          Full name
+        </label>
+
+        <input
+          type="text"
+          id="fullName"
+          required
+        />
+
       </div>
+
+
+      <!-- ==================================================
+           GENDER + SECTION
+      ================================================== -->
+
       <div class="field-row">
+
         <div class="field">
-          <label for="gender">Gender</label>
+
+          <label for="gender">
+            Gender
+          </label>
+
           <select id="gender">
-            <option value="">Not specified</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+
+            <option value="">
+              Not specified
+            </option>
+
+            <option value="Male">
+              Male
+            </option>
+
+            <option value="Female">
+              Female
+            </option>
+
           </select>
+
         </div>
+
+
         <div class="field">
-          <label for="dob">Date of birth</label>
-          <input type="date" id="dob" />
+
+          <label for="section">
+            Section
+          </label>
+
+          <select id="section">
+
+            <option value="">
+              Not specified
+            </option>
+
+            <option value="Day">
+              Day
+            </option>
+
+            <option value="Boarding">
+              Boarding
+            </option>
+
+          </select>
+
         </div>
+
       </div>
+
+
+      <!-- ==================================================
+           DATE OF BIRTH
+      ================================================== -->
+
+      <div class="field">
+
+        <label for="dob">
+          Date of birth
+        </label>
+
+        <input
+          type="date"
+          id="dob"
+        />
+
+      </div>
+
+
+      <!-- ==================================================
+           CLASS + STREAM
+      ================================================== -->
+
       <div class="field-row">
+
         <div class="field">
-          <label for="classSelect">Class</label>
-          <select id="classSelect" required></select>
+
+          <label for="classSelect">
+            Class
+          </label>
+
+          <select
+            id="classSelect"
+            required
+          ></select>
+
         </div>
+
+
         <div class="field">
-          <label for="streamSelect">Stream</label>
+
+          <label for="streamSelect">
+            Stream
+          </label>
+
           <select id="streamSelect">
-            <option value="">None</option>
+
+            <option value="">
+              None
+            </option>
+
           </select>
+
         </div>
+
       </div>
-      <div class="checkbox-field" id="statusRow" style="display:none;">
-        <input type="checkbox" id="isActive" />
-        <label for="isActive">Active</label>
+
+
+      <!-- ==================================================
+           STATUS
+      ================================================== -->
+
+      <div
+        class="checkbox-field"
+        id="statusRow"
+        style="display:none;"
+      >
+
+        <input
+          type="checkbox"
+          id="isActive"
+        />
+
+        <label for="isActive">
+          Active
+        </label>
+
       </div>
+
+
+      <!-- ==================================================
+           ACTIONS
+      ================================================== -->
+
       <div class="modal-actions">
-        <button type="button" class="secondary" id="cancelBtn">Cancel</button>
-        <button type="submit" class="primary">Save</button>
+
+        <button
+          type="button"
+          class="secondary"
+          id="cancelBtn"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="primary"
+        >
+          Save
+        </button>
+
       </div>
+
     </form>
+
   </div>
+
 </dialog>
 
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
 <script src="../js/supabase-config.js"></script>
+
 <script src="../js/auth.js"></script>
+
 <script src="../js/admin-common.js"></script>
-<script src="../js/students.js"></script>
+
+<!-- v=2 forces the browser to load the newest students.js -->
+<script src="../js/students.js?v=2"></script>
 
 </body>
 </html>
