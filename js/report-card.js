@@ -136,33 +136,87 @@ async function loadReportCard() {
   const marks = marksResult.data || [];
 
 
-  // -----------------------------------------
-  // SCHOOL HEADER
-  // -----------------------------------------
+ // -----------------------------------------
+// SCHOOL HEADER
+// -----------------------------------------
 
-  const schoolName = document.getElementById("schoolName");
-  const schoolMotto = document.getElementById("schoolMotto");
-  const schoolContact = document.getElementById("schoolContact");
-  const headTeacherName = document.getElementById("headTeacherName");
+const schoolName =
+  document.getElementById("schoolName");
 
-  if (schoolName) {
-    schoolName.textContent = school.name || "";
+const schoolAddressLine1 =
+  document.getElementById("schoolAddressLine1");
+
+const schoolAddressLine2 =
+  document.getElementById("schoolAddressLine2");
+
+const schoolMotto =
+  document.getElementById("schoolMotto");
+
+const schoolPhone =
+  document.getElementById("schoolPhone");
+
+const schoolEmail =
+  document.getElementById("schoolEmail");
+
+const headTeacherName =
+  document.getElementById("headTeacherName");
+
+if (schoolName) {
+  schoolName.textContent =
+    school.name || "";
+}
+
+// -----------------------------------------
+// ADDRESS — TWO DISTINCT LINES
+// -----------------------------------------
+
+if (schoolAddressLine1 || schoolAddressLine2) {
+
+  const address =
+    (school.address || "").trim();
+
+  const lines =
+    address
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(Boolean);
+
+  if (schoolAddressLine1) {
+    schoolAddressLine1.textContent =
+      lines[0] || "";
   }
 
-  if (schoolMotto) {
-    schoolMotto.textContent = school.motto || "";
+  if (schoolAddressLine2) {
+    schoolAddressLine2.textContent =
+      lines[1] || "";
   }
+}
+// -----------------------------------------
+// MOTTO
+// -----------------------------------------
 
-  if (schoolContact) {
-    schoolContact.textContent = [
-      school.address,
-      school.phone,
-      school.email
-    ]
-      .filter(Boolean)
-      .join(" · ");
-  }
+if (schoolMotto) {
+  schoolMotto.textContent =
+    school.motto || "";
+}
 
+// -----------------------------------------
+// PHONE CONTACTS
+// -----------------------------------------
+
+if (schoolPhone) {
+  schoolPhone.textContent =
+    school.phone || "";
+}
+
+// -----------------------------------------
+// EMAIL
+// -----------------------------------------
+
+if (schoolEmail) {
+  schoolEmail.textContent =
+    school.email || "";
+}
   if (headTeacherName) {
     headTeacherName.textContent =
       school.head_teacher_name || "";
@@ -466,11 +520,15 @@ if (printButton) {
 
 initReportCard();
 // --------------------------------------------------
-// Save current report card as PDF
+// Save complete report card as PDF
 // --------------------------------------------------
 
-async function saveReportCardAsPdf() {
-  const btn = document.getElementById("savePdfBtn");
+// --------------------------------------------------
+// Save report card as PDF
+// --------------------------------------------------
+
+function saveReportCardAsPdf() {
+  const reportCard = document.getElementById("reportCard");
 
   if (!reportCard || reportCard.style.display === "none") {
     alertBox.innerHTML =
@@ -478,71 +536,9 @@ async function saveReportCardAsPdf() {
     return;
   }
 
-  btn.disabled = true;
-  btn.textContent = "Preparing PDF...";
-
-  try {
-    const studentName =
-      document.getElementById("studentName")?.textContent.trim() ||
-      "Student";
-
-    const academicYear =
-      document.getElementById("infoYear")?.textContent.trim() ||
-      "Year";
-
-    const term =
-      document.getElementById("infoTerm")?.textContent.trim() ||
-      "Term";
-
-    const safeName = `${studentName}_${term}_${academicYear}_Report_Card`
-      .replace(/[<>:"/\\|?*]+/g, "")
-      .replace(/\s+/g, "_");
-
-    const options = {
-      margin: 8,
-      filename: `${safeName}.pdf`,
-
-      image: {
-        type: "jpeg",
-        quality: 0.98
-      },
-
-      html2canvas: {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff"
-      },
-
-      jsPDF: {
-        unit: "mm",
-        format: "a4",
-        orientation: "portrait"
-      },
-
-      pagebreak: {
-        mode: ["css", "legacy"]
-      }
-    };
-
-    await html2pdf()
-      .set(options)
-      .from(reportCard)
-      .save();
-
-    alertBox.innerHTML =
-      '<div class="alert success">Report card PDF saved successfully.</div>';
-
-  } catch (error) {
-    console.error("PDF generation error:", error);
-
-    alertBox.innerHTML =
-      `<div class="alert error">Could not create the PDF: ${escapeHtml(error.message || "Unknown error")}</div>`;
-
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Save as PDF";
-  }
+  window.print();
 }
+
 const savePdfButton = document.getElementById("savePdfBtn");
 
 if (savePdfButton) {

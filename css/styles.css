@@ -835,3 +835,211 @@ table.grading-key-table th {
   width: 170px;
   height: 75px;
 }
+
+.school-header {
+  text-align: center;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+
+.school-name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.school-address {
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.school-motto {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-style: italic;
+  text-decoration: underline;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.school-contact {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.school-email {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+/* ==================================================
+   REPORT CARD PDF
+================================================== */
+
+.report-card {
+  background: #ffffff;
+  color: #000000;
+}
+
+
+/* School logo */
+
+.school-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.school-logo {
+  max-width: 90px;
+  max-height: 90px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+
+/* Prevent table rows from being split */
+
+.report-results {
+  page-break-inside: auto;
+}
+
+.report-results tr {
+  page-break-inside: avoid;
+  page-break-after: auto;
+}
+
+
+/* Keep important sections together */
+
+.grading-key {
+  page-break-inside: avoid;
+}
+
+.report-comments {
+  page-break-inside: avoid;
+}
+
+.report-signature {
+  page-break-inside: avoid;
+}
+
+
+/* Head Teacher signature */
+
+.report-signature {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  page-break-inside: avoid;
+}
+
+.report-signature .sig-block {
+  text-align: center;
+  min-width: 220px;
+}
+
+.report-signature img {
+  height: 50px;
+  width: auto;
+  display: block;
+  margin: 0 auto 4px auto;
+}
+
+.report-signature .sig-line {
+  border-top: 1px solid var(--ink);
+  width: 200px;
+  margin: 0 auto;
+  padding-top: 4px;
+  font-size: 0.8rem;
+}
+
+#headTeacherName {
+  font-weight: 700;
+}
+
+
+/* Blank physical stamp area */
+
+.stamp-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 10px;
+}
+
+.stamp-space {
+  width: 170px;
+  height: 75px;
+}
+
+
+/* PDF / print */
+
+@media print {
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .report-toolbar,
+  .no-print {
+    display: none !important;
+  }
+
+  .report-card {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+}
+@media print {
+  .no-print,
+  .report-toolbar,
+  #alertBox {
+    display: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .report-card {
+    display: block !important;
+    background: #fff !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .report-results {
+    page-break-inside: auto;
+  }
+
+  .report-results tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .grading-key,
+  .report-comments,
+  .report-signature {
+    page-break-inside: avoid;
+  }
+}
